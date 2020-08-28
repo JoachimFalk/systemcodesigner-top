@@ -22,3 +22,11 @@
 	path = SystemC-VPC
 	url = https://github.com/JoachimFalk/systemoc-SystemC-VPC.git
 	branch = master
+[submodule "opt4j"]
+	path = opt4j
+	url = https://github.com/JoachimFalk/dse-opt4j.git
+	branch = jfalk/3.2
+[submodule "opendse"]
+	path = opendse
+	url = https://github.com/JoachimFalk/dse-opendse.git
+	branch = master

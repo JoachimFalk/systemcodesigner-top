@@ -1,8 +1,8 @@
 config.h.in
 configure
 Makefile.in
+obj
 .gradle
-gradle-app.setting
-Examples-*
-Maestro-*
+.classpath
+obj-gradle
 RemoteSystemsTempFiles

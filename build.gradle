@@ -1,0 +1,76 @@
+// vim: set syntax=groovy sts=2 ts=8 et:
+
+apply plugin: 'org.gradle.lifecycle-base'
+apply plugin: 'java'
+
+allprojects {
+
+  buildDir = 'obj-gradle'
+
+  ext.cxxBuild  = false
+  ext.javaBuild = true
+
+  ext.opt4jDependencies =
+    ['opt4j-core', 'opt4j-operators', 'opt4j-satdecoding', 'opt4j-optimizers', 'opt4j-viewer']
+  ext.opendseDependencies =
+    ['opendse-generator', 'opendse-io', 'opendse-model', 'opendse-optimization', 'opendse-realtime', 'opendse-tutorial', 'opendse-visualization' ]
+
+  repositories {
+    maven {
+        name "jitpack"
+        url 'https://jitpack.io'
+    }
+    mavenCentral()
+    jcenter()
+  }
+
+}
+
+['assemble', 'build', 'check', 'clean'].each {
+  Task task = tasks.getAt(it);
+  task.description = "This task ${it}s all subprojects."
+  childProjects.keySet().each { project -> task.dependsOn "$project:$it" }
+}
+
+build.dependsOn 'dse-dist'
+
+def opendseSubprojects = subprojects.inject([]) { l, subproject ->
+    if (subproject.name.startsWith("opendse-")) {
+      l.add(subproject.path+":jar")
+    }
+    return l 
+  } 
+
+dependencies {
+  subprojects.each { subproject ->
+      if (subproject.name.startsWith("opendse-")) {
+          runtime project(subproject.path)
+      }
+    }
+}
+
+task 'dse-dist'(dependsOn: opendseSubprojects, type: Jar) {
+  group = "Build"
+  description = "This task assembles the self-contained dse-dist.jar"
+  destinationDir = new File(project.buildDir, 'dse-dist')
+  archiveName = 'dse-dist.jar'
+  from {
+    configurations.runtime.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
+//from zipTree(new File(parent.project("dse").buildDir, "jars/dse/jar/dse.jar"))
+//from zipTree(new File(parent.project("dseconstraintcommons").buildDir, "jars/constraintcommons/jar/constraintcommons.jar"))
+//fileTree(dir: 'lib', include: '*.jar').each {  
+//  from zipTree(it)
+//}
+  manifest {
+    attributes 'Main-Class': 'org.opt4j.core.start.Opt4J'
+//  attributes 'SplashScreen-Image': 'img/splash.png'
+  }
+}
+
+task 'run'(dependsOn: 'dse-dist', type: JavaExec) {
+  main = 'org.opt4j.core.start.Opt4J'
+  classpath = files(tasks.'dse-dist'.archivePath)
+}

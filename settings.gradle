@@ -1,0 +1,22 @@
+rootProject.name = 'systemcodesigner-top'
+
+//System.out.println("Working Directory = " +
+//  System.getProperty("user.dir"));
+
+def findSubprojects(File projectDir, String projectPrefix) {
+  for (File file : projectDir.listFiles()) {
+    if (file.isDirectory() &&
+        !file.getName().equals("buildSrc") &&
+        !file.getName().equals("bin")) {
+      File buildGradle = new File(file, "build.gradle");
+      if (buildGradle.exists()) {
+        String projectPath = projectPrefix+file.getName();
+//      System.out.println("Subproject: " + projectPrefix+file.getName());
+        include projectPrefix+file.getName();
+        findSubprojects(file, projectPrefix+file.getName()+":");
+      }
+    }
+  }
+}
+
+findSubprojects(rootProject.projectDir, "")
