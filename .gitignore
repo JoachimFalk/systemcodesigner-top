@@ -1,8 +1,2 @@
-config.h.in
-configure
-Makefile.in
 obj
-.gradle
-.classpath
-obj-gradle
 RemoteSystemsTempFiles

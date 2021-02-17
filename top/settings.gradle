@@ -1,4 +1,4 @@
-rootProject.name = 'systemcodesigner-top'
+rootProject.name = 'top'
 
 //System.out.println("Working Directory = " +
 //  System.getProperty("user.dir"));
