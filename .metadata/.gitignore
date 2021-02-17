@@ -22,6 +22,7 @@ GitProjectData.properties
 .plugins/org.eclipse.ui.workbench/*
 !.plugins/org.eclipse.ui.workbench/workingsets.xml
 .plugins/org.eclipse.rse.core
+.plugins/org.eclipse.wst.internet.cache
 .plugins/org.eclipse.wst.sse.core
 .plugins/org.python.pydev/pyunit_tests
 .plugins/org.eclipse.cdt.core/*
