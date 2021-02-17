@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vpcconfiguration SYSTEM "vpc.dtd">
+<vpcconfiguration resultFile="4core-results.txt">
+  <resources>
+    <tracer type="PAJE" name="pajeTracer">
+      <attribute type="traceFileName" value="4core-pajeTracer.paje"/>
+    </tracer>
+    <component name="CPU1" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="20 ns"/>
+    </component>
+    <component name="CPU2" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="20 ns"/>
+    </component>
+    <component name="CPU3" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="20 ns"/>
+    </component>
+    <component name="CPU4" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="20 ns"/>
+    </component>
+  </resources>
+
+  <links>
+    <link type="UNDIRECTED" source="CPU1" target="CPU2"/>
+    <link type="UNDIRECTED" source="CPU1" target="CPU3"/>
+    <link type="UNDIRECTED" source="CPU1" target="CPU4"/>
+    <link type="UNDIRECTED" source="CPU2" target="CPU3"/>
+    <link type="UNDIRECTED" source="CPU2" target="CPU4"/>
+    <link type="UNDIRECTED" source="CPU3" target="CPU4"/>
+  </links>
+
+  <mappings>  
+    <mapping source="pgTop.mSrc" targetRegex="CPU[1234]">
+      <timing delay="3 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.block2Row" targetRegex="CPU[1234]">
+      <timing delay="30 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.scale1" targetRegex="CPU[1234]">
+       <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.scale2" targetRegex="CPU[1234]">
+      <timing delay="18.5 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.fly1" targetRegex="CPU[1234]">
+      <timing delay="30 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.fly2" targetRegex="CPU[1234]">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.fly3" targetRegex="CPU[1234]">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub1" targetRegex="CPU[1234]">
+       <timing delay="40 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub2" targetRegex="CPU[1234]">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub3" targetRegex="CPU[1234]">
+      <timing delay="10 ns"/>
+    </mapping>
+
+
+    <mapping source="pgTop.mIdct2D.idctRow.addSub4" targetRegex="CPU[1234]">
+      <timing delay="21.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub5" targetRegex="CPU[1234]">
+      <timing delay="7.5 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub6" targetRegex="CPU[1234]">
+      <timing delay="40 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub7" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub8" targetRegex="CPU[1234]">
+      <timing delay="32.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub9" targetRegex="CPU[1234]">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub10" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.scale1" targetRegex="CPU[1234]">
+      <timing delay="25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.scale2" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub1" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+
+
+
+
+    <mapping source="pgTop.mIdct2D.transpose" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.fly1" targetRegex="CPU[1234]">
+      <timing delay="40 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.fly2" targetRegex="CPU[1234]">
+      <timing delay="16.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.fly3" targetRegex="CPU[1234]">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub2" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub3" targetRegex="CPU[1234]">
+      <timing delay="31.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub4" targetRegex="CPU[1234]">
+      <timing delay="8.75 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub5" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub6" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub7" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub9" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+
+
+
+
+
+
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub8" targetRegex="CPU[1234]">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub10" targetRegex="CPU[1234]">
+      <timing delay="20 ns"/>
+    </mapping>
+
+    <mapping source="pgTop.mIdct2D.column2block" targetRegex="CPU[1234]">
+      <timing delay="90 ns"/>
+    </mapping>
+
+    <mapping source="pgTop.mIdct2D.rangeAdjust" targetRegex="CPU[1234]">
+      <timing delay="10 ns"/>
+    </mapping>
+
+    <mapping source="pgTop.mSnk" targetRegex="CPU[1234]">
+      <timing delay="10 ns"/>
+    </mapping>
+
+
+
+
+  </mappings>
+  <topology default="ignore"/>
+</vpcconfiguration>

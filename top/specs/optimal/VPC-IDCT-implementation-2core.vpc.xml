@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vpcconfiguration SYSTEM "vpc.dtd">
+<vpcconfiguration resultFile="2core-results.txt">
+  <resources>
+   
+    <tracer type="PAJE" name="pajeTracer">
+      <attribute type="traceFileName" value="2core-pajeTracer.paje"/>
+    </tracer>
+    
+    <component name="CPU1" scheduler="FCFS">
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="20 ns"/>
+    </component>
+    <component name="CPU2" scheduler="FCFS">
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="20 ns"/>
+    </component>
+
+  </resources>
+  <mappings>  
+    <mapping source="pgTop.mSrc" target="CPU1">
+      <timing delay="3 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.block2Row" target="CPU1">
+      <timing delay="30 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.scale1" target="CPU1">
+       <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.scale2" target="CPU1">
+      <timing delay="18.5 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.fly1" target="CPU1">
+      <timing delay="30 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.fly2" target="CPU1">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.fly3" target="CPU1">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub1" target="CPU1">
+       <timing delay="40 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub2" target="CPU1">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub3" target="CPU1">
+      <timing delay="10 ns"/>
+    </mapping>
+
+
+    <mapping source="pgTop.mIdct2D.idctRow.addSub4" target="CPU1">
+      <timing delay="21.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub5" target="CPU1">
+      <timing delay="7.5 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub6" target="CPU1">
+      <timing delay="40 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub7" target="CPU1">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub8" target="CPU1">
+      <timing delay="32.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub9" target="CPU1">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctRow.addSub10" target="CPU1">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.scale1" target="CPU1">
+      <timing delay="25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.scale2" target="CPU1">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub1" target="CPU1">
+      <timing delay="15 ns"/>
+    </mapping>
+
+
+
+
+    <mapping source="pgTop.mIdct2D.transpose" target="CPU2">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.fly1" target="CPU2">
+      <timing delay="40 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.fly2" target="CPU2">
+      <timing delay="16.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.fly3" target="CPU2">
+      <timing delay="20 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub2" target="CPU2">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub3" target="CPU2">
+      <timing delay="31.25 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub4" target="CPU2">
+      <timing delay="8.75 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub5" target="CPU2">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub6" target="CPU2">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub7" target="CPU2">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub9" target="CPU2">
+      <timing delay="15 ns"/>
+    </mapping>
+
+
+
+
+
+
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub8" target="CPU2">
+      <timing delay="15 ns"/>
+    </mapping>
+    <mapping source="pgTop.mIdct2D.idctColumn.addSub10" target="CPU2">
+      <timing delay="20 ns"/>
+    </mapping>
+
+    <mapping source="pgTop.mIdct2D.column2block" target="CPU2">
+      <timing delay="90 ns"/>
+    </mapping>
+
+    <mapping source="pgTop.mIdct2D.rangeAdjust" target="CPU2">
+      <timing delay="10 ns"/>
+    </mapping>
+
+    <mapping source="pgTop.mSnk" target="CPU2">
+      <timing delay="10 ns"/>
+    </mapping>
+
+
+
+
+  </mappings>
+  <topology default="ignore"/>
+</vpcconfiguration>
