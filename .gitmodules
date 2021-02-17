@@ -1,28 +1,28 @@
 [submodule "Scripts"]
-	path = Scripts
+	path = top/Scripts
 	url = https://github.com/JoachimFalk/common-Scripts.git
 	branch = master
 [submodule "BuildSystem"]
-	path = BuildSystem
+	path = top/BuildSystem
 	url = https://github.com/JoachimFalk/common-BuildSystem.git
 	branch = master
 [submodule "Support"]
-	path = Support
+	path = top/Support
 	url = https://github.com/JoachimFalk/common-Support.git
 	branch = master
 [submodule "SysteMoC"]
-	path = SysteMoC
+	path = top/SysteMoC
 	url = https://github.com/JoachimFalk/systemoc-SysteMoC.git
 	branch = master
 [submodule "SystemC-VPC"]
-	path = SystemC-VPC
+	path = top/SystemC-VPC
 	url = https://github.com/JoachimFalk/systemoc-SystemC-VPC.git
 	branch = master
 [submodule "opt4j"]
-	path = opt4j
+	path = top/opt4j
 	url = https://github.com/JoachimFalk/dse-opt4j.git
 	branch = jfalk/3.2
 [submodule "opendse"]
-	path = opendse
+	path = top/opendse
 	url = https://github.com/JoachimFalk/dse-opendse.git
 	branch = master
