@@ -25,15 +25,21 @@
       <attribute type="tracer" value="pajeTracer"/>
       <attribute type="transaction_delay" value="20 ns"/>
     </component>
+    <component name="BUS" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="300 us" />
+    </component>
+    <component name="MEM" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="400 us" />
+    </component>
   </resources>
 
   <links>
-    <link type="UNDIRECTED" source="CPU1" target="CPU2"/>
-    <link type="UNDIRECTED" source="CPU1" target="CPU3"/>
-    <link type="UNDIRECTED" source="CPU1" target="CPU4"/>
-    <link type="UNDIRECTED" source="CPU2" target="CPU3"/>
-    <link type="UNDIRECTED" source="CPU2" target="CPU4"/>
-    <link type="UNDIRECTED" source="CPU3" target="CPU4"/>
+    <link type="UNDIRECTED" sourceRegex="CPU[1234]" target="BUS"/>
+    <link type="UNDIRECTED" source="BUS" target="MEM"/>
   </links>
 
   <mappings>  
@@ -161,8 +167,7 @@
       <timing delay="10 ns"/>
     </mapping>
 
-
-
+    <mapping sourceRegex="^cf:" target="MEM"/>
 
   </mappings>
   <topology default="ignore"/>
