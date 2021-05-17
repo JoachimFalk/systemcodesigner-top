@@ -167,7 +167,7 @@
       <timing delay="10 ns"/>
     </mapping>
 
-    <mapping sourceRegex="^cf:" target="MEM"/>
+    <mapping sourceOptional="true" sourceRegex="^cf:" target="MEM"/>
 
   </mappings>
   <topology default="ignore"/>
