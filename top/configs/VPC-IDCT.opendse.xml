@@ -5,6 +5,7 @@
 <configuration>
   <module class="de.fau.scd.VPC.evaluation.VPCEvaluatorModule">
     <property name="useSNGReaderSetup">true</property>
+    <property name="vpcIgnoreRouting">false</property>
     <property name="simulatorExecutable">&CONFIGDIR;/../../obj/SystemC-VPC/testcases/test-idct2d</property>
     <property name="simulatorArguments"/>
     <property name="simulatorEnvironment">SYSTEMOC_PLUGINPATH=&CONFIGDIR;/../../obj/SystemC-VPC/.libs;SRC_ITERS=1024</property>
@@ -17,14 +18,13 @@
     <property name="simulatorEnvironment">SYSTEMOC_PLUGINPATH=&CONFIGDIR;/../../obj/SystemC-VPC/.libs;SRC_ITERS=1024</property>
     <property name="vpcConfigTemplate">&CONFIGDIR;/../specs/VPC-IDCT-architecture-4core.vpc.xml</property>
     <property name="chanTranslation">CHANS_ARE_MEMORY_TASKS</property>
-    <property name="multicastMessages">true</property>
-    <property name="shareFIFOBuffers">true</property>
+    <property name="shareFIFOBuffers">false</property>
   </module>
   <module class="net.sf.opendse.encoding.module.OptimizationNewModule">
     <property name="allocationEncoding">UTILIZATION</property>
     <property name="removeCyclesManually">false</property>
     <property name="routingEncoding">FLOW</property>
-    <property name="routingEncodingType">NONE</property>
+    <property name="routingEncodingType">FLEXIBLE</property>
     <property name="stagnationRestartEnabled">true</property>
     <property name="maximalNumberStagnatingGenerations">20</property>
     <property name="useModularEncoding">true</property>
