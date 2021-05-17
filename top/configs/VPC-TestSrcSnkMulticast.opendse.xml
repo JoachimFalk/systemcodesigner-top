@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration [
+  <!ENTITY CONFIGDIR SYSTEM "opt4j://CONFIGDIR">
+]>
+<configuration>
+  <module class="de.fau.scd.VPC.evaluation.VPCEvaluatorModule">
+    <property name="useSNGReaderSetup">true</property>
+    <property name="simulatorExecutable">&CONFIGDIR;/../../obj/SystemC-VPC/testcases/test-src-snk-multicast</property>
+    <property name="simulatorArguments">10</property>
+    <property name="simulatorEnvironment">SYSTEMOC_PLUGINPATH=&CONFIGDIR;/../../obj/SystemC-VPC/.libs</property>
+    <property name="vpcConfigTemplate">&CONFIGDIR;/../specs/VPC-TestSrcSnkMulticast/VPC-TestSrcSnkMulticast.vpc.xml</property>
+    <property name="vpcIgnoreRouting">false</property>
+    <property name="objectives">throughput,MAX,throughput.txt,Throughput: (.*)</property>
+  </module>
+  <module class="de.fau.scd.VPC.io.SNGReaderModule">
+    <property name="dfgSource">DFG_FROM_SIM_EXPORT</property>
+    <property name="simulatorExecutable">&CONFIGDIR;/../../obj/SystemC-VPC/testcases/test-src-snk-multicast</property>
+    <property name="simulatorArguments">10</property>
+    <property name="simulatorEnvironment">SYSTEMOC_PLUGINPATH=&CONFIGDIR;/../../obj/SystemC-VPC/.libs</property>
+    <property name="vpcConfigTemplate">&CONFIGDIR;/../specs/VPC-TestSrcSnkMulticast/VPC-TestSrcSnkMulticast.vpc.xml</property>
+    <property name="chanTranslation">CHANS_ARE_MEMORY_TASKS</property>
+    <property name="shareFIFOBuffers">true</property>
+  </module>
+  <module class="net.sf.opendse.encoding.module.OptimizationNewModule">
+    <property name="allocationEncoding">UTILIZATION</property>
+    <property name="removeCyclesManually">false</property>
+    <property name="routingEncoding">FLOW</property>
+    <property name="routingEncodingType">FLEXIBLE</property>
+    <property name="stagnationRestartEnabled">true</property>
+    <property name="maximalNumberStagnatingGenerations">20</property>
+    <property name="useModularEncoding">true</property>
+    <property name="usePreprocessing">true</property>
+    <property name="useVariableOrder">true</property>
+  </module>
+  <module class="net.sf.opendse.optimization.evaluator.SumEvaluatorModule">
+    <property name="sum">resources</property>
+    <property name="type">MIN</property>
+    <property name="priority">0</property>
+  </module>
+  <module class="org.opt4j.optimizers.ea.EvolutionaryAlgorithmModule">
+    <property name="generations">500</property>
+    <property name="alpha">100</property>
+    <property name="mu">25</property>
+    <property name="lambda">25</property>
+    <property name="crossoverRate">0.95</property>
+  </module>
+  <module class="org.opt4j.viewer.ViewerModule">
+    <property name="closeEvent">STOP</property>
+    <property name="closeOnStop">false</property>
+    <property name="title">Opt4J SNAPSHOT-20180313 Viewer</property>
+  </module>
+</configuration>
