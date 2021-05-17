@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!DOCTYPE vpcconfiguration SYSTEM "vpc.dtd">
+<vpcconfiguration>
+  <resources>
+    <tracer type="PAJE" name="pajeTracer">
+      <attribute type="traceFileName" value="pajeTracer.paje"/>
+    </tracer>
+    <component name="CPU1" scheduler="SPNOPRE">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <opendseattr name="type"    type="STRING" value="processor"/>
+      <attribute type="tracer" value="VCD">
+        <attribute type="traceFileName" value="CPU1.vcd"/>
+      </attribute>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="200 us" />
+    </component>
+    <component name="CPU2" scheduler="SPNOPRE">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <opendseattr name="type"    type="STRING" value="processor"/>
+      <attribute type="tracer" value="VCD">
+        <attribute type="traceFileName" value="CPU2.vcd"/>
+      </attribute>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="250 us" />
+    </component>
+    <component name="BUS" scheduler="FCFS">
+      <opendseattr name="type"    type="STRING" value="crossbar"/>
+      <attribute type="tracer" value="VCD">
+        <attribute type="traceFileName" value="BUS.vcd"/>
+      </attribute>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="300 us" />
+    </component>
+    <component name="MEM1" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <opendseattr name="type"    type="STRING" value="memory"/>
+      <opendseattr name="bandwidth" type="DOUBLE" value="25"/>
+      <attribute type="tracer" value="VCD">
+        <attribute type="traceFileName" value="MEM1.vcd"/>
+      </attribute>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="400 us" />
+    </component>
+    <component name="MEM2" scheduler="FCFS">
+      <opendseattr name="resources" type="INT" value="1"/>
+      <opendseattr name="type"    type="STRING" value="memory"/>
+      <opendseattr name="bandwidth" type="DOUBLE" value="25"/>
+      <attribute type="tracer" value="VCD">
+        <attribute type="traceFileName" value="MEM2.vcd"/>
+      </attribute>
+      <attribute type="tracer" value="pajeTracer"/>
+      <attribute type="transaction_delay" value="450 us" />
+    </component>
+  </resources>
+
+   <links>
+    <link type="UNDIRECTED" source="CPU1" target="BUS"/>
+    <link type="UNDIRECTED" source="CPU2" target="BUS"/>
+    <link type="UNDIRECTED" source="MEM1" target="BUS"/>
+    <link type="UNDIRECTED" source="MEM2" target="BUS"/>
+  </links>
+  
+  <mappings>
+   <mapping source="top.foo.src" targetRegex="CPU[12]">
+     <timing delay="7.5 ms"/>
+     <!--
+     <attribute type="priority" value="1" />
+     -->
+   </mapping>
+   <mapping source="top.foo.snk1" targetRegex="CPU[12]">
+     <timing delay="10.0 ms"/>
+     <!--
+     <attribute type="priority" value="2" />
+     -->
+   </mapping>
+   <mapping source="top.foo.snk2" targetRegex="CPU[12]">
+     <timing delay="12.5 ms"/>
+     <!--
+     <attribute type="priority" value="3" />
+     -->
+   </mapping>
+   <mapping source="top.snk3" targetRegex="CPU[12]">
+     <timing delay="5.5 ms"/>
+     <!--
+     <attribute type="priority" value="0" />
+     -->
+   </mapping>
+   <mapping source="top.snk4" targetRegex="CPU[12]">
+     <timing delay="25 ms"/>
+     <!--
+     <attribute type="priority" value="5" />
+     -->
+   </mapping>
+   <mapping sourceOptional="1" sourceRegex="^cf:" targetRegex="^MEM[12]"/>
+  </mappings>
+
+  <topology>
+   <route name="top.foo.src.o_0" type="StaticRoute">
+     <hop component="CPU1">
+       <hop component="BUS">
+         <hop component="MEM1">
+           <desthop channel="top.foo.cf:src->snk1"/>
+           <desthop channel="top.foo.cf:src->snk2"/>
+         </hop>
+         <hop component="MEM2">
+           <desthop channel="top.cf:foo->snk3"/>
+           <desthop channel="top.cf:foo->snk4"/>
+         </hop>
+       </hop>
+     </hop>
+   </route>
+   <route name="top.foo.snk1.i_0" type="StaticRoute">
+     <hop component="MEM1">
+       <hop component="BUS">
+         <hop component="CPU1">
+           <desthop/>
+         </hop>
+       </hop>
+     </hop>
+   </route>
+   <route name="top.foo.snk2.i_0" type="StaticRoute">
+     <hop component="MEM1">
+       <hop component="BUS">
+         <hop component="CPU1">
+           <desthop/>
+         </hop>
+       </hop>
+     </hop>
+   </route>
+   <route name="top.snk3.i_0" type="StaticRoute">
+     <hop component="MEM2">
+       <hop component="BUS">
+         <hop component="CPU2">
+           <desthop/>
+         </hop>
+       </hop>
+     </hop>
+   </route>
+   <route name="top.snk4.i_0" type="StaticRoute">
+     <hop component="MEM2">
+       <hop component="BUS">
+         <hop component="CPU2">
+           <desthop/>
+         </hop>
+       </hop>
+     </hop>
+   </route>
+  </topology>
+</vpcconfiguration>
