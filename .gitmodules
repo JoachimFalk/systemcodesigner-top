@@ -1,27 +1,35 @@
-[submodule "Scripts"]
-	path = top/Scripts
-	url = https://github.com/JoachimFalk/common-Scripts.git
+[submodule "SysteMoC"]
+	path = top/SysteMoC
+	url = https://github.com/JoachimFalk/systemoc-SysteMoC.git
 	branch = master
 [submodule "BuildSystem"]
 	path = top/BuildSystem
 	url = https://github.com/JoachimFalk/common-BuildSystem.git
 	branch = master
+[submodule "Scripts"]
+	path = top/Scripts
+	url = https://github.com/JoachimFalk/common-Scripts.git
+	branch = master
 [submodule "Support"]
 	path = top/Support
 	url = https://github.com/JoachimFalk/common-Support.git
-	branch = master
-[submodule "SysteMoC"]
-	path = top/SysteMoC
-	url = https://github.com/JoachimFalk/systemoc-SysteMoC.git
 	branch = master
 [submodule "SystemC-VPC"]
 	path = top/SystemC-VPC
 	url = https://github.com/JoachimFalk/systemoc-SystemC-VPC.git
 	branch = master
+#[submodule "SGXUtils"]
+#	path = top/SGXUtils
+#	url = codesign:sda/src/dfg/SGXUtils
+#	branch = master
+#[submodule "LibNGAnalysis"]
+#	path = top/LibNGAnalysis
+#	url = codesign:sda/src/dfg/LibNGAnalysis
+#	branch = master
 [submodule "opt4j"]
 	path = top/opt4j
 	url = https://github.com/JoachimFalk/dse-opt4j.git
-	branch = jfalk/3.2
+	branch = jfalk/3.3.0
 [submodule "opendse"]
 	path = top/opendse
 	url = https://github.com/JoachimFalk/dse-opendse.git
